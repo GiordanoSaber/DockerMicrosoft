@@ -5,6 +5,19 @@
 @inject OrderState OrderState
 
 <div class="main">
+    <ul class="pizza-cards">
+        @foreach (var special in specials ?? new())
+        {
+            <li @onclick="@(() => OrderState.ShowConfigurePizzaDialog(special))" 
+                style="background-image: url('@special.ImageUrl')">
+                <div class="pizza-info">
+                    <span class="title">@special.Name</span>
+                    @special.Description
+                    <span class="price">@special.GetFormattedBasePrice()</span>
+                </div>
+            </li>
+        }
+    </ul>
     <p id="currentCount">Current count: 0</p>
 
     <button class="btn btn-primary" onclick="incrementCount()">Click me</button>
